@@ -18,8 +18,7 @@ Autor*/
 -Imprimir (obligatorio)*/
 
 #include <iostream>
-
-
+#include <string>
 // 1. Estructura con los datos solicitados del libro
 struct Libro
 {
@@ -37,19 +36,21 @@ struct Nodo
 };
 
 // 3. Punteros globales para manejar la lista
-Nodo* lista_inicio = nullptr;
+Nodo *lista_inicio = nullptr;
 
 // Prototipos de funciones (Estilo Google: snake_case)
-void insertar_al_inicio(const Libro& nuevo_libro);
-void insertar_al_final(const Libro& nuevo_libro);
+void insertar_al_inicio(const Libro &nuevo_libro);
+void insertar_al_final(const Libro &nuevo_libro);
 void imprimir_biblioteca();
 Libro pedir_datos_usuario();
 void cargar_datos_quemados();
 
-int main() {
+int main()
+{
     int opcion = 0;
 
-    do {
+    do
+    {
         std::cout << "\n===================================\n";
         std::cout << "   BIBLIOTECA DE LIBROS (LAB 2)    \n";
         std::cout << "===================================\n";
@@ -60,9 +61,43 @@ int main() {
         std::cout << "0. Salir del programa\n";
         std::cout << "-----------------------------------\n";
         std::cout << "Ingrese su opcion: ";
+        // Validacion simple por si el usuario ingresa letras en vez de numeros
+        if (!(std::cin >> opcion))
+        {
+            std::cout << "\nError: Por favor, ingrese un numero valido.\n";
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            continue;
+        }
+        std::cin.ignore(); // Limpiar salto de linea
 
-        
-   } while (opcion != 0);
+        switch (opcion)
+        {
+        case 1:
+        {
+            Libro nuevo = pedir_datos_usuario();
+            insertar_al_inicio(nuevo);
+            break;
+        }
+        case 2:
+        {
+            Libro nuevo = pedir_datos_usuario();
+            insertar_al_final(nuevo);
+            break;
+        }
+        case 3:
+            imprimir_biblioteca();
+            break;
+        case 4:
+            cargar_datos_quemados();
+            break;
+        case 0:
+            std::cout << "\nSaliendo del sistema de la biblioteca...\n";
+            break;
+        default:
+            std::cout << "\nOpcion no valida. Intente de nuevo.\n";
+        }
+    } while (opcion != 0);
 
     return 0;
 }
