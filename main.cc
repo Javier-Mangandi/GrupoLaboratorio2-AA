@@ -18,7 +18,7 @@ Autor*/
 -Imprimir (obligatorio)*/
 
 #include <iostream>
-#include <string>
+
 
 // 1. Estructura con los datos solicitados del libro
 struct Libro
@@ -37,15 +37,32 @@ struct Nodo
 };
 
 // 3. Punteros globales para manejar la lista
-Nodo *inicio = nullptr;
-Nodo *fin = nullptr;
+Nodo* lista_inicio = nullptr;
 
-int main()
-{
-    // Aquí puedes agregar la lógica base:
-    // Datos quemados (hardcoded) para probar o el menú principal.
+// Prototipos de funciones (Estilo Google: snake_case)
+void insertar_al_inicio(const Libro& nuevo_libro);
+void insertar_al_final(const Libro& nuevo_libro);
+void imprimir_biblioteca();
+Libro pedir_datos_usuario();
+void cargar_datos_quemados();
 
-    std::cout << "--- Sistema de Biblioteca Inicializado ---\n";
+int main() {
+    int opcion = 0;
+
+    do {
+        std::cout << "\n===================================\n";
+        std::cout << "   BIBLIOTECA DE LIBROS (LAB 2)    \n";
+        std::cout << "===================================\n";
+        std::cout << "1. Insertar libro al inicio\n";
+        std::cout << "2. Insertar libro al final\n";
+        std::cout << "3. Imprimir biblioteca (Obligatoria)\n";
+        std::cout << "4. Cargar datos quemados (Hardcoded)\n";
+        std::cout << "0. Salir del programa\n";
+        std::cout << "-----------------------------------\n";
+        std::cout << "Ingrese su opcion: ";
+
+        
+   } while (opcion != 0);
 
     return 0;
 }
