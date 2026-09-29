@@ -101,3 +101,50 @@ int main()
 
     return 0;
 }
+
+// Solicita de forma segura los strings al usuario
+Libro pedir_datos_usuario() {
+    Libro nuevo;
+    std::cout << "\n--- Registrar Datos del Libro ---\n";
+    std::cout << "Codigo del libro: ";
+    std::getline(std::cin, nuevo.codigo);
+    std::cout << "Titulo: ";
+    std::getline(std::cin, nuevo.titulo);
+    std::cout << "Autor: ";
+    std::getline(std::cin, nuevo.autor);
+    return nuevo;
+}
+
+// Operacion: Insertar al inicio de la lista doble
+void insertar_al_inicio(const Libro& nuevo_libro) {
+    Nodo* nuevo_nodo = new Nodo{nuevo_libro, nullptr, nullptr};
+
+    // Validacion simple: Si la lista esta vacia
+    if (lista_inicio == nullptr) {
+        lista_inicio = nuevo_nodo;
+    } else {
+        nuevo_nodo->siguiente = lista_inicio;
+        lista_inicio->anterior = nuevo_nodo;
+        lista_inicio = nuevo_nodo; // El puntero global ahora apunta al nuevo primero
+    }
+    std::cout << "\n[!] Libro insertado al inicio con exito.\n";
+}
+
+// Operacion: Insertar al final de la lista doble
+void insertar_al_final(const Libro& nuevo_libro) {
+    Nodo* nuevo_nodo = new Nodo{nuevo_libro, nullptr, nullptr};
+
+    // Validacion simple: Si es el primer elemento
+    if (lista_inicio == nullptr) {
+        lista_inicio = nuevo_nodo;
+    } else {
+        // Al no tener un puntero 'fin' global, recorremos hasta llegar al ultimo
+        Nodo* actual = lista_inicio;
+        while (actual->siguiente != nullptr) {
+            actual = actual->siguiente;
+        }
+        actual->siguiente = nuevo_nodo;
+        nuevo_nodo->anterior = actual;
+    }
+    std::cout << "\n[!] Libro insertado al final con exito.\n";
+}
